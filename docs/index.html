@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Research Hub - VEX IQ学习中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .learning-goals {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .learning-goals h2 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .goal-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .goal-item::before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        @media (min-width: 600px) {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            border: 2px solid #eee;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+        }
+        
+        .project-card.priority-1 {
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .project-card.priority-2 {
+            border-left: 5px solid #ffa502;
+        }
+        
+        .project-card.priority-3 {
+            border-left: 5px solid #4ecdc4;
+        }
+        
+        .project-priority {
+            display: inline-block;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .priority-1 .project-priority {
+            background: #ffe0e0;
+            color: #ff6b6b;
+        }
+        
+        .priority-2 .project-priority {
+            background: #ffe8cc;
+            color: #ffa502;
+        }
+        
+        .priority-3 .project-priority {
+            background: #ccf0ed;
+            color: #4ecdc4;
+        }
+        
+        .project-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #333;
+        }
+        
+        .project-desc {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .project-time {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 15px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #f0f0f0;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .project-link:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .timeline {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+        
+        .timeline-marker {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+        
+        .timeline-content h3 {
+            font-size: 15px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .timeline-content p {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        footer {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .progress-tracker {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .progress-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .progress-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            margin-right: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .progress-checkbox:hover {
+            border-color: #667eea;
+        }
+        
+        .progress-item input[type="checkbox"]:checked + .progress-checkbox {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Learning Research Hub</h1>
+            <p>VEX IQ Build Assistant Phase 2 学习中心</p>
+        </header>
+        
+        <div class="learning-goals">
+            <h2>📚 学习目标</h2>
+            <div class="goal-item">深入学习三个项目的核心原理</div>
+            <div class="goal-item">动手实现迷你版本验证理解</div>
+            <div class="goal-item">设计集成方案改造VEX系统</div>
+        </div>
+        
+        <div class="progress-tracker">
+            <h2 style="font-size: 16px; margin-bottom: 15px; color: #333;">📈 完成进度</h2>
+            <div class="progress-item">
+                <input type="checkbox" id="p1" checked>
+                <label for="p1" style="margin-left: 10px;">✓ 仓库建立 + 项目Fork</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="p2">
+                <label for="p2" style="margin-left: 10px;">AutoResearch Phase 1 (理论学习)</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="p3">
+                <label for="p3" style="margin-left: 10px;">AutoResearch Phase 2-3 (实验 + 集成)</label>
+            </div>
+            <div class="progress-item">
+                <input type="checkbox" id="p4">
+                <label for="p4" style="margin-left: 10px;">nanochat + graphify学习</label>
+            </div>
+        </div>
+        
+        <h2 style="font-size: 20px; margin: 30px 0 20px; color: #333;">📖 学习项目</h2>
+        <div class="projects-grid">
+            <div class="project-card priority-1">
+                <span class="project-priority">⭐⭐⭐ 最高优先级</span>
+                <h3>AutoResearch</h3>
+                <p class="project-desc">AI agent自主研究 → Agent自迭代评估能力 → Designer/Integrator改造</p>
+                <p class="project-time">投入: 6.5-9小时</p>
+                <a href="autoresearch-phase1.html" class="project-link">进入学习 →</a>
+            </div>
+            
+            <div class="project-card priority-2">
+                <span class="project-priority">⭐⭐ 高优先级</span>
+                <h3>nanochat</h3>
+                <p class="project-desc">极简全栈架构设计 → 学习最小化pipeline → UI参考</p>
+                <p class="project-time">投入: 4小时</p>
+                <a href="#" class="project-link">敬请期待</a>
+            </div>
+            
+            <div class="project-card priority-3">
+                <span class="project-priority">⭐⭐ 中优先级</span>
+                <h3>graphify</h3>
+                <p class="project-desc">快速评估相关性 → 图结构应用 → 部件库可视化</p>
+                <p class="project-time">投入: 0.5-4小时</p>
+                <a href="#" class="project-link">敬请期待</a>
+            </div>
+        </div>
+        
+        <div class="timeline">
+            <h2>📅 学习日程</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker">1</div>
+                <div class="timeline-content">
+                    <h3>理论学习</h3>
+                    <p>阅读代码、记笔记、理解原理。每个项目3-4小时。产出：research-intake/文件夹中的学习笔记。</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker">2</div>
+                <div class="timeline-content">
+                    <h3>实验验证</h3>
+                    <p>动手写代码、修改参数、测试想法。在sandbox/中创建迷你版本。验证你的理解是否正确。</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker">3</div>
+                <div class="timeline-content">
+                    <h3>项目集成</h3>
+                    <p>生成integration/中的集成设计文档。这些方案将直接用于改造vex-iq-build-assistant。</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker">4</div>
+                <div class="timeline-content">
+                    <h3>代码改造</h3>
+                    <p>基于集成方案，修改vex-iq-build-assistant中的Designer和Integrator agents。</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>💾 本网页可离线访问 | 记住：学懂 → 实验 → 集成</p>
+            <p style="margin-top: 10px;">Learning Research Hub © 2026 | Kaige</p>
+        </footer>
+    </div>
+</body>
+</html>

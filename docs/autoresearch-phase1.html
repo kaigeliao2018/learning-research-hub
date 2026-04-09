@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoResearch Phase 1 - 理论学习 | Learning Research Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .nav a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+        
+        .project-intro {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .project-intro h2 {
+            font-size: 16px;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+        
+        .project-intro p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .phase-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        
+        .info-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-top: 4px solid #ff6b6b;
+        }
+        
+        .section h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section h3 {
+            font-size: 15px;
+            color: #ff6b6b;
+            margin: 20px 0 10px;
+        }
+        
+        .subsection {
+            margin-bottom: 20px;
+        }
+        
+        .subsection p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+        
+        .code-block {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            border-left: 3px solid #ff6b6b;
+        }
+        
+        .learning-path {
+            background: #fff8f8;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 3px solid #ff6b6b;
+        }
+        
+        .learning-path strong {
+            color: #ff6b6b;
+        }
+        
+        .highlight-box {
+            background: #fff8f8;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 3px solid #667eea;
+        }
+        
+        .highlight-box strong {
+            color: #667eea;
+        }
+        
+        .output-template {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 3px solid #ffa502;
+        }
+        
+        .output-template strong {
+            color: #ffa502;
+        }
+        
+        .checklist {
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .checklist li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 14px;
+        }
+        
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: #999;
+            font-size: 16px;
+        }
+        
+        .learning-tips {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 3px solid #4caf50;
+        }
+        
+        .learning-tips strong {
+            color: #4caf50;
+        }
+        
+        .time-estimate {
+            display: inline-block;
+            background: #ffe0e0;
+            color: #ff6b6b;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .progress-bar {
+            background: #f0f0f0;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a6f);
+            height: 100%;
+            width: 33%;
+            border-radius: 4px;
+        }
+        
+        .toc {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #eee;
+        }
+        
+        .toc h3 {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .toc-item {
+            padding: 8px 0;
+            padding-left: 20px;
+            border-left: 2px solid #f0f0f0;
+            font-size: 13px;
+        }
+        
+        .toc-item a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        footer {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 40px;
+        }
+        
+        .action-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: all 0.2s ease;
+        }
+        
+        .action-button:hover {
+            background: #ee5a6f;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="index.html">← 返回首页</a>
+            <span style="font-size: 12px; color: #999;">AutoResearch Phase 1</span>
+        </div>
+        
+        <header>
+            <h1>🔍 AutoResearch Phase 1</h1>
+            <p>理论学习：理解Agent自迭代的核心原理</p>
+        </header>
+        
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        
+        <div class="project-intro">
+            <h2>为什么优先学AutoResearch？</h2>
+            <p>你的VEX IQ Build Assistant计划四个并行agents：Analyzer、Packer、Designer、Integrator。其中Designer（生成步骤）和Integrator（QA验证）都需要<strong>自评估 + 自迭代</strong>的能力。AutoResearch正是解决这个问题的直接参考。</p>
+        </div>
+        
+        <div class="phase-info">
+            <div class="info-card">
+                <div class="info-label">预计时长</div>
+                <div class="info-value">3-4h</div>
+            </div>
+            <div class="info-card">
+                <div class="info-label">包含部分</div>
+                <div class="info-value">3</div>
+            </div>
+            <div class="info-card">
+                <div class="info-label">输出文件</div>
+                <div class="info-value">3份</div>
+            </div>
+            <div class="info-card">
+                <div class="info-label">难度</div>
+                <div class="info-value">中等</div>
+            </div>
+        </div>
+        
+        <div class="toc">
+            <h3>📋 内容导航</h3>
+            <div class="toc-item"><a href="#section1">1.1 信息采集</a></div>
+            <div class="toc-item"><a href="#section2">1.2 深度代码阅读（三圈）</a></div>
+            <div class="toc-item"><a href="#section3">1.3 理论总结</a></div>
+            <div class="toc-item"><a href="#learning-output">学习输出清单</a></div>
+        </div>
+        
+        <!-- Section 1.1 -->
+        <div class="section" id="section1">
+            <h2>1.1 信息采集 (30min)</h2>
+            
+            <div class="subsection">
+                <p>首先，快速了解AutoResearch是什么。这一步不求深入，只是获取全貌。</p>
+            </div>
+            
+            <h3>🎯 学习目标</h3>
+            <p>理解AutoResearch的核心概念、主要流程、项目结构。</p>
+            
+            <h3>📚 学习步骤</h3>
+            <div class="code-block">cd /Users/kaigeliao/learning-research-hub/projects/autoresearch
+
+# 1. 快速了解项目
+cat README.md
+
+# 2. 看主训练循环（只看前100行，理解流程）
+cat train.py | head -100
+
+# 3. 看实验日志格式
+ls -la runs/
+cat runs/*/log.json | head -50</div>
+            
+            <h3>📝 产出：autoresearch-overview.md</h3>
+            <p>在 <code>research-intake/</code> 目录中创建 <code>autoresearch-overview.md</code> 文件，记录你的理解（用自己的话）：</p>
+            
+            <div class="output-template">
+                <strong>输出模板：</strong>
+                <div style="margin-top: 10px; font-size: 13px;">
+                    <p><strong># AutoResearch 核心概念</strong></p>
+                    <p><strong>## What it does</strong></p>
+                    <p>- [你的理解，不是copy官方文档]</p>
+                    <p><strong>## 为什么叫"自研究"？</strong></p>
+                    <p>- [它如何自主进行实验的?]</p>
+                    <p><strong>## 关键代码片段位置</strong></p>
+                    <p>- Agent修改代码：[文件名 + 关键函数]</p>
+                    <p>- 评估逻辑：[文件名 + 关键函数]</p>
+                    <p>- 迭代决策：[文件名 + 关键函数]</p>
+                </div>
+            </div>
+            
+            <div class="learning-tips">
+                <strong>💡 学习建议：</strong> 不要逐行读代码，只是快速浏览，找到核心文件。时间有限，目标是理解"它在干什么"，不是"怎么干的"。
+            </div>
+        </div>
+        
+        <!-- Section 1.2 -->
+        <div class="section" id="section2">
+            <h2>1.2 深度代码阅读（三圈，2.5小时）</h2>
+            
+            <div class="subsection">
+                <p>这是Phase 1最重要的部分。我们用"三圈法"逐步深化对代码的理解。每圈都专注于不同的问题。</p>
+            </div>
+            
+            <h3>🎯 学习目标</h3>
+            <p>理解Agent如何自主修改代码、如何评估改进、如何做决策保留/回滚。</p>
+            
+            <h3>📚 第1圈：流程理解 (40min)</h3>
+            <div class="learning-path">
+                <strong>关键问题：</strong> Agent执行的大致流程是什么？一次迭代循环包含哪几个步骤？
+            </div>
+            
+            <p>你需要找到：</p>
+            <ul class="checklist">
+                <li>主循环在哪个文件？</li>
+                <li>一次迭代的四个步骤分别对应哪些函数？</li>
+                <li>修改代码的逻辑在哪？</li>
+                <li>评估的逻辑在哪？</li>
+                <li>保留/回滚的逻辑在哪？</li>
+            </ul>
+            
+            <div class="output-template">
+                <strong>输出：autoresearch-code-walkthrough.md（第1圈部分）</strong>
+                <div style="margin-top: 10px; font-size: 13px;">
+                    <p><strong>## AutoResearch Code Deep Dive - 第1圈：流程理解</strong></p>
+                    <p><strong>### Agent execution loop (伪代码)</strong></p>
+                    <p>```python<br>while not converged:<br>&nbsp;&nbsp;&nbsp;&nbsp;# 1. 基于历史，生成代码修改提案<br>&nbsp;&nbsp;&nbsp;&nbsp;modification = agent.propose_modification(history)<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# 2. 应用修改<br>&nbsp;&nbsp;&nbsp;&nbsp;apply_change(modification)<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# 3. 训练并测试<br>&nbsp;&nbsp;&nbsp;&nbsp;result = train_and_test(duration=5min)<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# 4. 评估是否改进<br>&nbsp;&nbsp;&nbsp;&nbsp;improved = result.score > best_score<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# 5. 保留或回滚<br>&nbsp;&nbsp;&nbsp;&nbsp;if improved:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keep_change(modification)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;best_score = result.score<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;revert_change(modification)<br>```</p>
+                    <p><strong>### 关键代码位置</strong></p>
+                    <p>- [你找到的文件和行号]</p>
+                </div>
+            </div>
+            
+            <h3>📚 第2圈：关键细节 (60min)</h3>
+            <div class="learning-path">
+                <strong>关键问题：</strong> 每个步骤的具体实现细节是什么？
+            </div>
+            
+            <p>深入理解这些问题：</p>
+            <ul class="checklist">
+                <li>怎样"修改"代码？随机选择？启发式选择？</li>
+                <li>怎样"评估"改进？用什么指标？CORE分数？</li>
+                <li>怎样"决策"保留/丢弃？简单的阈值比较？</li>
+                <li>如何避免无限循环？有convergence条件吗？</li>
+                <li>如何处理训练失败的情况？异常恢复机制？</li>
+            </ul>
+            
+            <h3>📚 第3圈：映射到VEX场景 (50min)</h3>
+            <div class="learning-path">
+                <strong>关键问题：</strong> AutoResearch的原理如何应用到VEX的Agent中？
+            </div>
+            
+            <p>做这些对比：</p>
+            <ul class="checklist">
+                <li>AutoResearch的"train"功能 ← → VEX Designer生成步骤（类似吗？）</li>
+                <li>AutoResearch的"evaluate"功能 ← → VEX Integrator检查步骤有效性（类似吗？）</li>
+                <li>AutoResearch的"modify"策略 ← → VEX中什么情况下需要改？</li>
+                <li>如果要用到VEX中，需要改什么？</li>
+            </ul>
+            
+            <div class="learning-tips">
+                <strong>💡 学习建议：</strong> 
+                <p>三圈循环进行。第1圈粗读，找到主要文件和函数。第2圈细读，理解每个步骤的细节。第3圈思考，不读代码，而是思考"这个在VEX中怎么用"。</p>
+            </div>
+        </div>
+        
+        <!-- Section 1.3 -->
+        <div class="section" id="section3">
+            <h2>1.3 理论总结 (30min)</h2>
+            
+            <div class="subsection">
+                <p>把你学到的东西浓缩成核心原则。这些原则将直接指导Phase 3的集成设计。</p>
+            </div>
+            
+            <h3>🎯 学习目标</h3>
+            <p>提炼AutoResearch的5个核心原则，并思考它们在VEX中的应用。</p>
+            
+            <h3>📝 产出：autoresearch-principles.md</h3>
+            
+            <div class="highlight-box">
+                <strong>AutoResearch的5个核心原则（你的理解）：</strong>
+                <p style="margin-top: 10px; font-size: 13px;">
+                    <p><strong>原则1：原子性改动</strong><br>- 每次修改一个可独立评估的单元<br>- VEX应用：Designer改动步骤顺序时，每次改动应该是...?</p>
+                    <p><strong>原则2：快速反馈循环</strong><br>- 训练5分钟 → 即刻反馈<br>- VEX应用：组装步骤生成的快速验证应该...?</p>
+                    <p><strong>原则3：历史感知</strong><br>- Agent记住之前的尝试，避免重复<br>- VEX应用：Designer应该记住...?</p>
+                    <p><strong>原则4：保守决策</strong><br>- 只有明确改进才保留<br>- VEX应用：什么情况下算"明确改进"？</p>
+                    <p><strong>原则5：可解释性</strong><br>- 能说出为什么保留/丢弃<br>- VEX应用：生成的指南要能解释为什么这样设计</p>
+                </p>
+            </div>
+            
+            <div class="learning-tips">
+                <strong>💡 学习建议：</strong>
+                <p>这不是复述官方文档，而是<strong>你自己用语言总结</strong>的原则。用自己最直白的语言写，越简单越好。这样写出来的东西才是真正理解了。</p>
+            </div>
+        </div>
+        
+        <!-- Learning Output -->
+        <div class="section" id="learning-output">
+            <h2>📤 Phase 1 完成后的输出清单</h2>
+            
+            <p>当你完成了上面三个部分，你应该有这些文件：</p>
+            
+            <div class="code-block">learning-research-hub/research-intake/
+├── autoresearch-overview.md (信息采集的总结)
+├── autoresearch-code-walkthrough.md (三圈代码阅读的详细笔记)
+└── autoresearch-principles.md (五个核心原则的理解)</div>
+            
+            <h3>✅ 完成标准</h3>
+            <ul class="checklist">
+                <li>能用自己的话解释"AutoResearch在干什么"</li>
+                <li>能画出或说出Agent的执行循环</li>
+                <li>能找到代码中的modify、evaluate、decide三个关键部分</li>
+                <li>能说出五个核心原则及其在VEX中的应用</li>
+                <li>三个markdown文件都写好了，共1000-1500字左右</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <strong>📌 检查清单：</strong>
+                <p style="margin-top: 10px; font-size: 13px;">
+                    当你完成Phase 1时，问自己：
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>我能解释什么是Agent的self-eval loop吗？</li>
+                        <li>我知道modification、evaluation、keep/discard的具体逻辑吗？</li>
+                        <li>我能想到至少2个在VEX中应用这个思想的地方吗？</li>
+                        <li>我的笔记够清晰，一个月后我还能读懂吗？</li>
+                    </ul>
+                </p>
+            </highlight-box>
+        </div>
+        
+        <!-- Next Steps -->
+        <div class="section">
+            <h2>🚀 下一步</h2>
+            
+            <p>Phase 1完成后，你就准备好进入Phase 2了。Phase 2会让你动手写代码，验证你的理解。</p>
+            
+            <div class="highlight-box">
+                <strong>Phase 2：实验验证</strong>
+                <p style="margin-top: 10px; font-size: 13px;">
+                    - 2.1：本地运行或分析AutoResearch的官方示例（1-1.5小时）
+                    <br>- 2.2：在sandbox/中写vex-autoresearch-simulation.py（1-1.5小时）
+                    <br>- 目标：用迷你版本验证你对原理的理解
+                </p>
+            </highlight-box>
+            
+            <a href="index.html" class="action-button">← 回到首页</a>
+        </div>
+        
+        <footer>
+            <p>⏱️ 总耗时：3-4小时 | 💾 本页面可离线访问</p>
+            <p style="margin-top: 10px;">AutoResearch Phase 1 © 2026 | Learning Research Hub</p>
+        </footer>
+    </div>
+</body>
+</html>
